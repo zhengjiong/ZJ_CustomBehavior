@@ -1,0 +1,102 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="RtlHardcoded"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/cheese_2"
+                android:scaleType="fitXY"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.9"
+                />
+            <!--<android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#80303F9F"
+                android:layout_gravity="bottom|center_horizontal"
+                android:titleTextColor="@android:color/white"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark"
+                >
+            </android.support.v7.widget.Toolbar>-->
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="#e0fa7851"
+                android:orientation="vertical"
+                >
+                <!--app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.3"-->
+
+            </FrameLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:behavior_overlapTop="30dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <!---->
+
+        <include layout="@layout/layout_main"/>
+    </android.support.v4.widget.NestedScrollView>
+
+    <!--
+    问题:这里为什么要使用app:layout_anchor="@id/frameLayout",而不把
+    toolbar直接放在frameLayout,的位置???
+    结果测试发现如果把toolbar放在frameLayout的位置, 向上滑动的时候
+    toolbar会固定在顶部, 现在这样写在下面也会固定在顶部,但是textview会覆盖
+    在toolbar上面,就看不到toolbar了, 如果把toolbar下载framelayout的位置,
+    toolbar就会覆盖下面的textview
+    -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#80303F9F"
+        android:titleTextColor="@android:color/white"
+        app:layout_anchor="@id/frameLayout"
+        app:layout_anchorGravity="top"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#60fd60c4"
+        android:gravity="center"
+        android:text="头条"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        app:layout_behavior=".Demo2Behavior"
+        >
+
+    </TextView>
+
+</android.support.design.widget.CoordinatorLayout>
