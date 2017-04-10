@@ -1,4 +1,4 @@
-package com.zj.example.custombehavior;
+package com.zj.example.custombehavior.tab;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

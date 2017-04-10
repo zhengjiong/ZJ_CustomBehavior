@@ -37,4 +37,10 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="demo5"/>
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Demo1_BottomSheetDialogActivity"/>
 </LinearLayout>

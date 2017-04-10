@@ -1,13 +1,12 @@
-package com.zj.example.custombehavior;
+package com.zj.example.custombehavior.tab;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
+
+import com.zj.example.custombehavior.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -20,18 +19,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author 郑炯
  * @version 1.0
  */
-public class Demo5Behavior extends CoordinatorLayout.Behavior<CircleImageView> {
-    private int mMinSize;
-    private int mStartX;
+public class Demo4Behavior extends CoordinatorLayout.Behavior<CircleImageView> {
     private int mStartY;
-    private LinearInterpolator mInterpolator = new LinearInterpolator();
 
-    public Demo5Behavior() {
+    public Demo4Behavior() {
     }
 
-    public Demo5Behavior(Context context, AttributeSet attrs) {
+    public Demo4Behavior(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mMinSize = TypedValue.complexToDimensionPixelSize(30, context.getResources().getDisplayMetrics());
     }
 
     @Override
@@ -47,15 +42,12 @@ public class Demo5Behavior extends CoordinatorLayout.Behavior<CircleImageView> {
     public boolean onDependentViewChanged(CoordinatorLayout parent, CircleImageView child, View dependency) {
         //记录开始的Y坐标  也就是toolbar起始Y坐标
         if (mStartY == 0) {
-            mStartX = dependency.getMeasuredWidth();
             mStartY = (int) dependency.getY();
         }
         System.out.println("startY = " + mStartY + " ,getY=" + dependency.getY());
         //计算Textview从开始移动到最后的百分比
-        float percent = dependency.getY() / mStartY;
-
-        child.setX((mStartX - child.getMeasuredWidth()) - ((mStartX - child.getMeasuredWidth()) / 2 * (1 - percent)));
-        child.setY(dependency.getY());
+        float percent = dependency.getY() / mStartY;    //改变child的坐标(从消失，到可见)
+        child.setY(child.getHeight() * (1 - percent) - child.getHeight());//child就是textview
         return true;
     }
 }

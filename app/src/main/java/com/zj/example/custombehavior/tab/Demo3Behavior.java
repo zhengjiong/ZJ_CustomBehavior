@@ -1,11 +1,14 @@
-package com.zj.example.custombehavior;
+package com.zj.example.custombehavior.tab;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.zj.example.custombehavior.R;
 
 /**
  * Title: Demo2Behavior
@@ -16,20 +19,23 @@ import android.widget.TextView;
  * @author 郑炯
  * @version 1.0
  */
-public class Demo2Behavior extends CoordinatorLayout.Behavior<TextView> {
-    private int mFrameMaxHeight = 100;
+public class Demo3Behavior extends CoordinatorLayout.Behavior<TextView> {
     private int mStartY;
 
-    public Demo2Behavior() {
+    public Demo3Behavior() {
     }
 
-    public Demo2Behavior(Context context, AttributeSet attrs) {
+    public Demo3Behavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, TextView child, View dependency) {
-        return dependency instanceof Toolbar;
+        if (dependency.getId() == R.id.title && dependency instanceof TextView) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -38,7 +44,8 @@ public class Demo2Behavior extends CoordinatorLayout.Behavior<TextView> {
         if (mStartY == 0) {
             mStartY = (int) dependency.getY();
         }
-        //计算toolbar从开始移动到最后的百分比
+        System.out.println("startY = " + mStartY + " ,getY=" + dependency.getY());
+        //计算Textview从开始移动到最后的百分比
         float percent = dependency.getY() / mStartY;    //改变child的坐标(从消失，到可见)
         child.setY(child.getHeight() * (1 - percent) - child.getHeight());//child就是textview
         return true;
