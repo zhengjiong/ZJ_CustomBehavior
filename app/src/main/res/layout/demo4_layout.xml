@@ -88,6 +88,6 @@
         android:src="@drawable/avator"
         app:border_color="@android:color/white"
         app:border_width="2dp"
-        app:layout_behavior=".Demo4Behavior"
+        app:layout_behavior=".tab.Demo4Behavior"
         />
 </android.support.design.widget.CoordinatorLayout>

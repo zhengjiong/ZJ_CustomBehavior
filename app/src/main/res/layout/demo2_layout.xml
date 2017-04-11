@@ -94,7 +94,7 @@
         android:text="头条"
         android:textColor="#fff"
         android:textSize="18sp"
-        app:layout_behavior=".Demo2Behavior"
+        app:layout_behavior=".tab.Demo2Behavior"
         >
 
     </TextView>

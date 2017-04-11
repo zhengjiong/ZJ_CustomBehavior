@@ -78,19 +78,18 @@
         android:gravity="center"
         android:text="button"
         app:layout_anchor="@id/frameLayout"
-        app:layout_anchorGravity="top"
-        />
+        app:layout_anchorGravity="top" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#fd60c4"
+        android:background="#a0fd60c4"
         android:gravity="center"
         android:text="头条"
         android:textColor="#fff"
         android:textSize="18sp"
-        app:layout_behavior=".Demo3Behavior"
+        app:layout_behavior=".tab.Demo3Behavior"
         >
 
     </TextView>
