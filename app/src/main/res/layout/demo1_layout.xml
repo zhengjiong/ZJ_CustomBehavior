@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_behavior=".Demo1Behavior"
+        app:layout_behavior=".tab.Demo1Behavior"
         android:text="接收者"/>
     <Button
         android:id="@+id/btn"
