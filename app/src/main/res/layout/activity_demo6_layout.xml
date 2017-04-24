@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.zj.example.custombehavior.Demo6Behavior">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:paddingRight="16dp"
+            android:background="?attr/colorPrimary"
+
+            >
+            <!--app:layout_scrollFlags="scroll"-->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@android:color/white"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        >
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="28dp"
+            android:text="神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能神的叫法可上到付精神科丁莱夫尽可能"/>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

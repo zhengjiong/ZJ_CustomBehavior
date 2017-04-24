@@ -55,5 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Demo1_FloatingButtonActivity.class));
             }
         });
+        findViewById(R.id.btn7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Demo6Activity_Eleme.class));
+            }
+        });
     }
 }

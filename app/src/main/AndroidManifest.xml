@@ -21,6 +21,7 @@
         <activity android:name=".tab.Demo3Activity"/>
         <activity android:name=".tab.Demo4Activity"/>
         <activity android:name=".tab.Demo5Activity"/>
+        <activity android:name=".Demo6Activity_Eleme"/>
         <activity android:name=".Demo1_FloatingButtonActivity"/>
     </application>
 

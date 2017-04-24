@@ -43,4 +43,10 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="Demo1_BottomSheetDialogActivity"/>
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="仿饿了么"/>
 </LinearLayout>
