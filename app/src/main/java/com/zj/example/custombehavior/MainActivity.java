@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.zj.example.custombehavior.tab.Demo1Activity;
 import com.zj.example.custombehavior.tab.Demo2Activity;
+import com.zj.example.custombehavior.tab.Demo2_1Activity;
 import com.zj.example.custombehavior.tab.Demo3Activity;
 import com.zj.example.custombehavior.tab.Demo4Activity;
 import com.zj.example.custombehavior.tab.Demo5Activity;
@@ -29,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Demo2Activity.class));
+            }
+        });
+        findViewById(R.id.btn2_1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Demo2_1Activity.class));
             }
         });
         findViewById(R.id.btn3).setOnClickListener(new View.OnClickListener() {

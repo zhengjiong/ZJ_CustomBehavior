@@ -18,7 +18,7 @@
             layout_collapseParallaxMultiplier设置成1的时候, 不会有视差效果,
             如果不想要视差效果,可以直接把上面的CollapsingToolbarLayout,改为Framelayout
         -->
-        <android.support.design.widget.CollapsingToolbarLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -48,7 +48,7 @@
                 app:theme="@style/ThemeOverlay.AppCompat.Dark"
                 >
             </android.support.v7.widget.Toolbar>-->
-            <FrameLayout
+            <android.support.v7.widget.Toolbar
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -59,8 +59,8 @@
                 <!--app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.3"-->
 
-            </FrameLayout>
-        </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.v7.widget.Toolbar>
+        </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
 
@@ -87,9 +87,8 @@
     在toolbar上面,就看不到toolbar了, 如果把toolbar下载framelayout的位置,
     toolbar就会覆盖下面的textview
 
-    *toolbar写在这里其实是为了让behavior用,但是也可以用frameLayout来当behavior*
     -->
-    <android.support.v7.widget.Toolbar
+    <!--<android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -98,13 +97,13 @@
         app:layout_anchor="@id/frameLayout"
         app:layout_anchorGravity="top"
         app:theme="@style/ThemeOverlay.AppCompat.Dark"
-        />
+        />-->
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#fd60c4"
+        android:background="#60fd60c4"
         android:gravity="center"
         android:text="头条"
         android:textColor="#fff"

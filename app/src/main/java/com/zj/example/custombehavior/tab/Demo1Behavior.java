@@ -24,10 +24,25 @@ public class Demo1Behavior extends CoordinatorLayout.Behavior {
         super(context, attrs);
     }
 
+    /**
+     * behavior基础概念
+     *
+     * 其实Behavior就是一个应用于View的观察者模式，一个View跟随者另一个View的变化而变化，
+     * 或者说一个View监听另一个View。
+     *
+     * 在Behavior中，被观察的View, 也就是事件源被称为denpendcy，而观察的View，则被称为child。
+     *
+     */
+
+
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
+        //layoutDependsOn() 代表寻找被观察View
+
         System.out.println("child -> "+ child.toString());
         System.out.println("dependency -> "+ dependency.toString());
+
+        //告知监听的事件源是Button
         return dependency instanceof Button;
     }
 
@@ -35,6 +50,8 @@ public class Demo1Behavior extends CoordinatorLayout.Behavior {
 
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
+        //当 dependency(Button)变化的时候，可以对child(TextView)进行操作
+
         System.out.println("onDependentViewChanged x=" + dependency.getX() + " ,y=" + dependency.getY());
         child.setX(dependency.getX());
         child.setY(dependency.getY() + 200);
