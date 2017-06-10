@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Title: Demo1_FloatingButtonActivity
+ * Title: Demo6_FloatingButtonActivity
  * Description:
  * Copyright:Copyright(c)2016
  * Company: 博智维讯信息技术有限公司
@@ -20,7 +20,7 @@ import android.view.ViewGroup;
  * @author 郑炯
  * @version 1.0
  */
-public class Demo1_FloatingButtonActivity extends AppCompatActivity {
+public class Demo6_FloatingButtonActivity extends AppCompatActivity {
     BottomSheetBehavior mBottomSheetBehavior;
 
     @Override

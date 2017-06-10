@@ -59,13 +59,25 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Demo1_FloatingButtonActivity.class));
+                startActivity(new Intent(MainActivity.this, Demo6_FloatingButtonActivity.class));
             }
         });
         findViewById(R.id.btn7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Demo6Activity_Eleme.class));
+                startActivity(new Intent(MainActivity.this, Demo7Activity_ScrollHide.class));
+            }
+        });
+        findViewById(R.id.btn10).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Demo10_BottomSheetBehavior.class));
+            }
+        });
+        findViewById(R.id.btn12).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Demo12_SwipeDismissBehavior.class));
             }
         });
     }

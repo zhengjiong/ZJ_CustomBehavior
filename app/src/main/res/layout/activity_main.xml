@@ -48,11 +48,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="Demo1_BottomSheetDialogActivity"/>
+        android:text="Demo6_FloatingButtonBehaviory"/>
     <Button
         android:id="@+id/btn7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="仿饿了么"/>
+        android:text="Demo7_Scroll_Hide"/>
+    <Button
+        android:id="@+id/btn10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Demo10_bottom_sheet_behavior"/>
+    <Button
+        android:id="@+id/btn12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Demo12_swipe_dismiss_behavior"/>
 </LinearLayout>

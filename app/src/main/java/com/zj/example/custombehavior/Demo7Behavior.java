@@ -10,12 +10,12 @@ import android.view.View;
  * Created by zj on 2017/4/24.
  */
 
-public class Demo6Behavior extends CoordinatorLayout.Behavior {
+public class Demo7Behavior extends CoordinatorLayout.Behavior {
     int offsetTotal = 0;
     boolean scrolling = false;
 
 
-    public Demo6Behavior(Context context, AttributeSet attrs) {
+    public Demo7Behavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
