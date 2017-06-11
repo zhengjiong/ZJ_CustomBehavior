@@ -80,5 +80,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Demo12_SwipeDismissBehavior.class));
             }
         });
+        findViewById(R.id.btn14).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Demo14_CustomBehavior.class));
+            }
+        });
     }
 }

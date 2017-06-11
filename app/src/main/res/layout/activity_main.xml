@@ -67,4 +67,9 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="Demo12_swipe_dismiss_behavior"/>
+    <Button
+        android:id="@+id/btn14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo14_custom_behavior(仿开眼app首页)"/>
 </LinearLayout>

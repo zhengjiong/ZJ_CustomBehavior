@@ -26,6 +26,7 @@
         <activity android:name=".Demo6_FloatingButtonActivity"/>
         <activity android:name=".Demo10_BottomSheetBehavior"/>
         <activity android:name=".Demo12_SwipeDismissBehavior"/>
+        <activity android:name=".Demo14_CustomBehavior"/>
     </application>
 
 </manifest>
