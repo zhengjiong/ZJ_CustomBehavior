@@ -37,6 +37,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     public boolean onLayoutChild(CoordinatorLayout parent, View child, int layoutDirection) {
         if (child instanceof RecyclerView) {
             System.out.println("onLayoutChild RecyclerView");
+            //这里如果返回true就代表自己来处理onLayout, 所以必须手动layout
             child.layout(0, 0, parent.getWidth(), parent.getHeight());
             child.setTranslationY(getHeaderHeight());
 
@@ -84,7 +85,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
      * 嵌套滚动发生之前被调用
      * 在nested scroll child 消费掉自己的滚动距离之前，嵌套滚动每次被nested scroll child
      * 更新都会调用onNestedPreScroll。注意有个重要的参数consumed，可以修改这个数组表示你消费
-     * 了多少距离。假设用户滑动了100px,child 做了90px 的位移，你需要把 consumed［1］的值改成90，
+     * 了多少距离。假设用户滑动了100px,child 只需要移动90px 的位移，你需要把 consumed［1］的值改成90，
      * 这样coordinatorLayout就能知道只处理剩下的10px的滚动。
      * <p>
      * onNestedPreScroll方法里面收到子view的滑动信息，然后做出相应的处理把处理完后的结果通过consumed传给子view。
@@ -107,6 +108,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
         //重要! 注意: 这里可以打开if测试, 这样就再也不会调用onNestedScroll方法, Recyclerview也不可以滑动
         /*if (true) {
             consumed[1] = dy;//把滑动的距离全部消耗掉,这样就不会回调onNestedScroll方法
+            return;
         }*/
 
         /**
@@ -171,6 +173,34 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
             //设置translationY为滑动的距离
             child.setTranslationY(child.getTranslationY() + Math.abs(dyUnconsumed));
         }
+    }
+
+    @Override
+    public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
+        System.out.println("onNestedFling -> velocityY=" + velocityY + " ,consumed=" + consumed);
+        //return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
+        return true;
+    }
+
+    /**
+     * 用户松开手指并且会发生惯性动作之前调用，参数提供了速度信息，可以根据这些速度信息
+     * 决定最终状态，比如滚动Header，是让Header处于展开状态还是折叠状态。返回true 表
+     * 示消费了fling, onNestedFling将不会被调用
+     *
+     * @param coordinatorLayout
+     * @param child
+     * @param target
+     * @param velocityX x 方向的速度
+     * @param velocityY y 方向的速度
+     * @return 返回true 表示消费了fling, onNestedFling将不会被调用
+     */
+    @Override
+    public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
+        System.out.println("onNestedPreFling -> velocityY=" + velocityY);
+        //return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
+
+        //返回true 表示消费了fling, onNestedFling将不会被调用
+        return true;
     }
 
     public float getHeaderHeight() {

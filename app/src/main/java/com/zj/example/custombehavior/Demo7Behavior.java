@@ -43,9 +43,21 @@ public class Demo7Behavior extends CoordinatorLayout.Behavior {
 
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
         //进行滑动事件处理
         System.out.println("dyConsumed = " + dyConsumed + "  ,dyUnconsumed = " + dyUnconsumed + " ," + target.getY() + " ," + target.getHeight());
-        //super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+        if (dyConsumed > 0 && dyUnconsumed == 0) {
+            System.out.println("上滑中。。。");
+        }
+        if (dyConsumed == 0 && dyUnconsumed > 0) {
+            System.out.println("到边界了还在上滑。。。");
+        }
+        if (dyConsumed < 0 && dyUnconsumed == 0) {
+            System.out.println("下滑中。。。");
+        }
+        if (dyConsumed == 0 && dyUnconsumed < 0) {
+            System.out.println("到边界了，还在下滑。。。");
+        }
         offset(child, dyConsumed);
     }
 
@@ -69,7 +81,7 @@ public class Demo7Behavior extends CoordinatorLayout.Behavior {
         //当进行快速滑动
         //return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
 
-        offset(child, (int) velocityY);
+        //offset(child, (int) velocityY);
 
         return true;
     }
