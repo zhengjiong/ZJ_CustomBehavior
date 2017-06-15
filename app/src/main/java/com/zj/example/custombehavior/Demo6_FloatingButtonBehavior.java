@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Title: FloatingButtonBehavior
+ * Title: Demo6_FloatingButtonBehavior
  * Description:
  * Copyright:Copyright(c)2016
  * Company: 博智维讯信息技术有限公司
@@ -19,20 +19,21 @@ import android.view.View;
  * @author 郑炯
  * @version 1.0
  */
-public class FloatingButtonBehavior extends FloatingActionButton.Behavior {
+public class Demo6_FloatingButtonBehavior extends CoordinatorLayout.Behavior {
     private boolean isAnimatingOut = false;
 
-    public FloatingButtonBehavior(Context context, AttributeSet attrs) {
+    public Demo6_FloatingButtonBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
-    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View directTargetChild, View target, int nestedScrollAxes) {
+    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
+        //return super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
         return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL;
     }
 
     @Override
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         if (dyConsumed > 0 && dyUnconsumed == 0) {
             System.out.println("上滑中。。。");
         }
@@ -49,9 +50,7 @@ public class FloatingButtonBehavior extends FloatingActionButton.Behavior {
         if (((dyConsumed > 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed > 0))
                 && child.getVisibility() != View.VISIBLE) {// 显示
             scaleShow(child, null);
-        }
-
-        if (((dyConsumed < 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed < 0))
+        } else if (((dyConsumed < 0 && dyUnconsumed == 0) || (dyConsumed == 0 && dyUnconsumed < 0))
                 && child.getVisibility() != View.GONE && !isAnimatingOut) {
             scaleHide(child, viewPropertyAnimatorListener);
         }

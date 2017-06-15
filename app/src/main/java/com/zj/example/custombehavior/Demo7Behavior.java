@@ -76,12 +76,23 @@ public class Demo7Behavior extends CoordinatorLayout.Behavior {
         scrolling = true;
     }
 
+    /**
+     * 你可以捕获对内部View的fling事件，如果return true则表示拦截掉内部View的事件。
+     *
+     * @param coordinatorLayout
+     * @param child
+     * @param target
+     * @param velocityX
+     * @param velocityY
+     * @param consumed 你可以捕获对内部View的fling事件，如果return true则表示拦截掉内部View的事件。
+     * @return
+     */
     @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
         //当进行快速滑动
         //return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
 
-        //offset(child, (int) velocityY);
+        offset(child, (int) velocityY);
 
         return true;
     }

@@ -66,7 +66,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
         //这里的返回值表明这次滑动我们要不要关心，我们要关心什么样的滑动？当然是y轴方向上的
-        boolean result = (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) == ViewCompat.SCROLL_AXIS_VERTICAL;
+        boolean result = nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL;
         System.out.println("onStartNestedScroll ---> " + result);
         return result;
         //return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
@@ -175,6 +175,17 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
         }
     }
 
+    /**
+     * 你可以捕获对内部View的fling事件，如果return true则表示拦截掉内部View的事件。
+     *
+     * @param coordinatorLayout
+     * @param child
+     * @param target
+     * @param velocityX
+     * @param velocityY
+     * @param consumed 你可以捕获对内部View的fling事件，如果return true则表示拦截掉内部View的事件。
+     * @return
+     */
     @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
         System.out.println("onNestedFling -> velocityY=" + velocityY + " ,consumed=" + consumed);
@@ -185,7 +196,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     /**
      * 用户松开手指并且会发生惯性动作之前调用，参数提供了速度信息，可以根据这些速度信息
      * 决定最终状态，比如滚动Header，是让Header处于展开状态还是折叠状态。返回true 表
-     * 示消费了fling, onNestedFling将不会被调用
+     * 示消费了fling, onNestedFling将不会被调用, childview也不会有惯性效果
      *
      * @param coordinatorLayout
      * @param child
@@ -197,10 +208,28 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     @Override
     public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
         System.out.println("onNestedPreFling -> velocityY=" + velocityY);
-        //return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
 
-        //返回true 表示消费了fling, onNestedFling将不会被调用
-        return true;
+
+        if (velocityY > 0) {//上滑
+            if (child.getTranslationY() > 0) {
+                if (child.getTranslationY() - Math.abs(velocityY) <= 0) {
+                    child.setTranslationY(0);
+                } else {
+                    child.setTranslationY(Math.abs(velocityY));
+                }
+                return true;
+            }
+        } else if (velocityY < 0) {
+            //下滑
+
+        }
+
+
+        //super.onNestedPreFling默认返回false
+        return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
+
+        //返回true 表示消费了fling, onNestedFling将不会被调用, childview也不会有惯性效果
+        //return true;
     }
 
     public float getHeaderHeight() {

@@ -28,6 +28,6 @@
         android:layout_margin="16dp"
         android:src="@mipmap/ic_launcher"
         android:visibility="visible"
-        app:layout_behavior="com.zj.example.custombehavior.FloatingButtonBehavior"
+        app:layout_behavior="com.zj.example.custombehavior.Demo6_FloatingButtonBehavior"
         app:layout_scrollFlags="scroll|enterAlways|snap" />
 </android.support.design.widget.CoordinatorLayout>

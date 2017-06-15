@@ -26,7 +26,7 @@ public class Demo6_FloatingButtonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo1_floatingbutton_layout);
+        setContentView(R.layout.demo6_floatingbutton_layout);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
