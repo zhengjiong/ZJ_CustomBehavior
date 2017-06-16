@@ -56,6 +56,12 @@
         android:textAllCaps="false"
         android:text="Demo7_Scroll_Hide"/>
     <Button
+        android:id="@+id/btn8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Demo8_仿知乎"/>
+    <Button
         android:id="@+id/btn10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

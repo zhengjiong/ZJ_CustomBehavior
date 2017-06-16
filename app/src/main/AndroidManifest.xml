@@ -23,6 +23,7 @@
         <activity android:name=".tab.Demo4Activity"/>
         <activity android:name=".tab.Demo5Activity"/>
         <activity android:name=".Demo7Activity_ScrollHide"/>
+        <activity android:name=".Demo8_ZhiHu_Activity"/>
         <activity android:name=".Demo6_FloatingButtonActivity"/>
         <activity android:name=".Demo10_BottomSheetBehavior"/>
         <activity android:name=".Demo12_SwipeDismissBehavior"/>

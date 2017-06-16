@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="demo14_behavior">com.zj.example.custombehavior.behavior.Demo14_Behavior</string>
+    <string name="demo8_behavior">com.zj.example.custombehavior.behavior.Demo8_Behavior</string>
 </resources>
