@@ -36,7 +36,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     @Override
     public boolean onLayoutChild(CoordinatorLayout parent, View child, int layoutDirection) {
         if (child instanceof RecyclerView) {
-            System.out.println("onLayoutChild RecyclerView");
+            //System.out.println("onLayoutChild RecyclerView");
             //这里如果返回true就代表自己来处理onLayout, 所以必须手动layout
             child.layout(0, 0, parent.getWidth(), parent.getHeight());
             child.setTranslationY(getHeaderHeight());
@@ -67,7 +67,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
         //这里的返回值表明这次滑动我们要不要关心，我们要关心什么样的滑动？当然是y轴方向上的
         boolean result = nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL;
-        System.out.println("onStartNestedScroll ---> " + result);
+        //System.out.println("onStartNestedScroll ---> " + result);
         return result;
         //return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
@@ -102,7 +102,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dx, int dy, int[] consumed) {
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
-        System.out.println("onNestedPreScroll dy=" + dy + " ,child.getTranslationY()=" + child.getTranslationY() + " ,consumed[1]=" + consumed[1]);
+        //System.out.println("onNestedPreScroll dy=" + dy + " ,child.getTranslationY()=" + child.getTranslationY() + " ,consumed[1]=" + consumed[1]);
 
 
         //重要! 注意: 这里可以打开if测试, 这样就再也不会调用onNestedScroll方法, Recyclerview也不可以滑动
@@ -154,7 +154,7 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
-        System.out.println("onNestedScroll dyConsumed=" + dyConsumed + " ,dyUnconsumed=" + dyUnconsumed);
+        //System.out.println("onNestedScroll dyConsumed=" + dyConsumed + " ,dyUnconsumed=" + dyUnconsumed);
 
         /**
          * dyUnconsumed代表划不动的时候, 子view未消耗的y轴距离
@@ -190,6 +190,27 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
         System.out.println("onNestedFling -> velocityY=" + velocityY + " ,consumed=" + consumed);
         //return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
+
+        if (velocityY > 0) {//上滑
+            if (child.getTranslationY() > 0) {
+                if (child.getTranslationY() - Math.abs(velocityY) <= 0) {
+                    //child.setTranslationY(0);
+                } else {
+                    //child.setTranslationY(Math.abs(velocityY));
+                }
+                //return true;
+            }
+            /*final int targetScroll = (int) -getHeaderHeight();
+            if (getTopBottomOffsetForScrollingSibling() > targetScroll) {
+                // If we're currently not expanded less than the target scroll, we'll
+                // animate a fling
+                animateOffsetTo(coordinatorLayout, child, targetScroll, velocityY);
+                flung = true;
+            }*/
+        } else if (velocityY < 0) {
+            //下滑
+
+        }
         return true;
     }
 
@@ -207,22 +228,10 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
      */
     @Override
     public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
-        System.out.println("onNestedPreFling -> velocityY=" + velocityY);
+        //System.out.println("onNestedPreFling -> velocityY=" + velocityY);
 
 
-        if (velocityY > 0) {//上滑
-            if (child.getTranslationY() > 0) {
-                if (child.getTranslationY() - Math.abs(velocityY) <= 0) {
-                    child.setTranslationY(0);
-                } else {
-                    child.setTranslationY(Math.abs(velocityY));
-                }
-                return true;
-            }
-        } else if (velocityY < 0) {
-            //下滑
 
-        }
 
 
         //super.onNestedPreFling默认返回false

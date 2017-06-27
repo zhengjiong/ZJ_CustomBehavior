@@ -78,4 +78,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Demo14_custom_behavior(仿开眼app首页)"/>
+    <Button
+        android:id="@+id/btn15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo15_custom_behavior(可拖动的卡片布局)"/>
 </LinearLayout>
