@@ -28,6 +28,7 @@
         <activity android:name=".Demo10_BottomSheetBehavior"/>
         <activity android:name=".Demo12_SwipeDismissBehavior"/>
         <activity android:name=".Demo14_CustomBehavior"/>
+        <activity android:name=".Demo15_CustomBehavior"/>
     </application>
 
 </manifest>
