@@ -21,6 +21,7 @@ import com.zj.example.custombehavior.R;
 
 public class Demo14_Behavior extends CoordinatorLayout.Behavior {
     private Context mContex;
+    private View child;
 
     public Demo14_Behavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -43,7 +44,8 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
         if (child instanceof RecyclerView) {
             //System.out.println("onLayoutChild RecyclerView");
             //这里如果返回true就代表自己来处理onLayout, 所以必须手动layout
-            child.layout(0, 0, parent.getWidth(), parent.getHeight());
+            this.child = child;
+            this.child.layout(0, 0, parent.getWidth(), parent.getHeight());
             child.setTranslationY(getHeaderHeight());
 
             return true;
@@ -199,31 +201,26 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
 
         if (velocityY > 0) {//上滑
             if (child.getTranslationY() > 0) {//还没有滑到顶部
+                int duration = computeDuration(velocityY);
+
                 if (child.getTranslationY() - Math.abs(velocityY) <= 0) {
                     //child.setTranslationY(0);
                     ViewCompat.animate(child)
-                            .setDuration(200)
+                            .setDuration(Math.min(duration, 300))
                             .translationY(0)
                             .setInterpolator(new DecelerateInterpolator())
                             .start();
                 } else {
                     //child.setTranslationY(Math.abs(velocityY));
                     ViewCompat.animate(child)
-                            .setDuration(200)
+                            .setDuration(Math.min(duration, 300))
                             .translationY(Math.abs(velocityY))
                             .setInterpolator(new DecelerateInterpolator())
                             .start();
                 }
                 return true;
             }
-            //ViewCompat.animate(child)
-            /*final int targetScroll = (int) -getHeaderHeight();
-            if (getTopBottomOffsetForScrollingSibling() > targetScroll) {
-                // If we're currently not expanded less than the target scroll, we'll
-                // animate a fling
-                animateOffsetTo(coordinatorLayout, child, targetScroll, velocityY);
-                flung = true;
-            }*/
+
         } else if (velocityY < 0) {
 
             int scrolledDistance = getScrolledDistance(((RecyclerView) child));
@@ -236,8 +233,9 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
                 velocityY = getHeaderHeight();
             }
             //下滑
+            int duration = computeDuration(velocityY);
             ViewCompat.animate(child)
-                    .setDuration(200)
+                    .setDuration(Math.min(duration, 300))
                     .translationY(Math.abs(velocityY))
                     .setInterpolator(new DecelerateInterpolator())
                     .start();
@@ -254,6 +252,34 @@ public class Demo14_Behavior extends CoordinatorLayout.Behavior {
         int itemHeight = firstVisibleItem.getHeight();
         int firstItemBottom = layoutManager.getDecoratedBottom(firstVisibleItem);
         return (firstItemPosition + 1) * itemHeight - firstItemBottom;
+
+    }
+
+    /**
+     * 根据速度计算滚动动画持续时间
+     * @param velocityY
+     * @return
+     */
+    private int computeDuration(float velocityY) {
+        final int distance;
+        float headerHeight = getHeaderHeight();
+        if (velocityY > 0) {
+            distance = (int) Math.abs(headerHeight - child.getScrollY());
+        } else {
+            distance = (int) Math.abs(headerHeight - (headerHeight - child.getScrollY()));
+        }
+
+
+        final int duration;
+        velocityY = Math.abs(velocityY);
+        if (velocityY > 0) {
+            duration = 3 * Math.round(1000 * (distance / velocityY));
+        } else {
+            final float distanceRatio = (float) distance / child.getHeight();
+            duration = (int) ((distanceRatio + 1) * 150);
+        }
+
+        return duration;
 
     }
 
