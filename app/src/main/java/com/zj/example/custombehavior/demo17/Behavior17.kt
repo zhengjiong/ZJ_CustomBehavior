@@ -61,7 +61,7 @@ class Behavior17 : AppBarLayout.Behavior {
              */
             if (dy < 0 && child.bottom >= child.height) {
                 scaleImg(child, target, dy)
-                consumed[1] = dy/5
+                consumed[1] = dy/5//不除以5的话速度会很快
                 return
             } else if (dy > 0 && mScale != 1F) {
                 scaleImg(child, target, dy)
@@ -96,6 +96,7 @@ class Behavior17 : AppBarLayout.Behavior {
     }
 
     fun recoveryImg() {
+        //必须判断mScale == 1F,不然会每次把mTotalDy都设置为0, 因为每次都会重新new一个新的ValueAnimator, 所以isRecovering为false的时候, 动画可能还没有真正结束
         if (mScale == 1F || isRecovering) {
             return
         }
@@ -123,6 +124,7 @@ class Behavior17 : AppBarLayout.Behavior {
 
             override fun onAnimationEnd(animation: Animator?) {
                 isRecovering = false
+                mTotalDy = 0
             }
 
             override fun onAnimationCancel(animation: Animator?) {
