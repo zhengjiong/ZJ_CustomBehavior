@@ -30,6 +30,7 @@
         <activity android:name=".Demo14_CustomBehavior"/>
         <activity android:name=".Demo15_CustomBehavior"/>
         <activity android:name=".Demo16_CustomBehavior"/>
+        <activity android:name=".demo17.Demo17_CustomBehavior"/>
     </application>
 
 </manifest>

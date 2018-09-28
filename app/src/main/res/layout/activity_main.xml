@@ -106,5 +106,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Demo16_淘宝店铺" />
+        <Button
+            android:id="@+id/btn17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Demo17_AppBar(个人中心)" />
     </LinearLayout>
 </ScrollView>
