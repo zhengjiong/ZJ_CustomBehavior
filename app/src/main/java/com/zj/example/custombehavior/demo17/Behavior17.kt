@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import com.zj.example.custombehavior.R
+import kotlin.properties.Delegates
 
 /**
  *
@@ -22,8 +23,12 @@ class Behavior17 : AppBarLayout.Behavior {
     var mTotalDy = 0
     var mScale = 1F
     var isAnimate = false
-    var isRecovering = false
+    var imgHeight: Int by Delegates.notNull()
+    var appbarHeight: Int by Delegates.notNull()
+
     lateinit var img: ImageView
+    lateinit var imgBottom: View
+    lateinit var appbar: AppBarLayout
 
     constructor() {}
 
@@ -31,7 +36,10 @@ class Behavior17 : AppBarLayout.Behavior {
 
     override fun onLayoutChild(parent: CoordinatorLayout, abl: AppBarLayout, layoutDirection: Int): Boolean {
         img = parent.findViewById(R.id.img)
-
+        appbar = abl
+        imgBottom = parent.findViewById(R.id.img_bottom)
+        imgHeight = img.measuredHeight
+        appbarHeight = abl.measuredHeight
         return super.onLayoutChild(parent, abl, layoutDirection)
     }
 
@@ -53,30 +61,34 @@ class Behavior17 : AppBarLayout.Behavior {
      */
     override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: AppBarLayout, target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
         //println("onNestedPreScroll  child=$child  target=$target  dy=$dy")
-        if (!isRecovering) {
+        if (anim != null && anim!!.isRunning) {
             //如果正在还原的过程中, 不scale图片, 不然画面会突然抖动
-
-            /**
-             * dy < 0,代表下滑, child就是appbar, child.bottom >= child.height用于判断appbar是否在顶部没有被滑动,如果不加会在滑动的过程中缩放img!
-             */
-            if (dy < 0 && child.bottom >= child.height) {
-                scaleImg(child, target, dy)
-                consumed[1] = dy/5//不除以5的话速度会很快
-                return
-            } else if (dy > 0 && mScale != 1F) {
-                scaleImg(child, target, dy)
-                consumed[1] = dy
-                return
-            }
+            return
         }
+
+
+        /**
+         * dy < 0,代表下滑, child就是appbar, child.bottom >= child.height用于判断appbar是否在顶部没有被滑动,如果不加会在滑动的过程中缩放img!
+         */
+        if (dy < 0 && child.bottom >= child.height) {
+            scaleImg(child, target, dy)
+            //consumed[1] = dy / 5//不除以5的话速度会很快
+            return
+        } else if (dy > 0 && mScale != 1F) {
+            scaleImg(child, target, dy)
+            //这里必须用把滑动距离都消耗完,不然最下面的ScrollView会先滑动!
+            consumed[1] = dy
+            return
+        }
+
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
     }
 
     override fun onNestedFling(coordinatorLayout: CoordinatorLayout, child: AppBarLayout, target: View, velocityX: Float, velocityY: Float, consumed: Boolean): Boolean {
         println("onNestedFling target=$target  velocityY=$velocityY  consumed=$consumed")
-        /*if (velocityY > 100) {
-            isAnimate = false
-        }*/
+        if (velocityY > 100) {
+            //isAnimate = false
+        }
         return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed)
     }
 
@@ -86,22 +98,36 @@ class Behavior17 : AppBarLayout.Behavior {
         super.onStopNestedScroll(coordinatorLayout, abl, target, type)
     }
 
-    fun scaleImg(child: AppBarLayout, target: View, dy: Int) {
+    fun scaleImg(appbar: AppBarLayout, target: View, dy: Int) {
         //下滑的时候,dy是负值
         mTotalDy += -dy
         println("scale mTotalDy=$mTotalDy")
-        mScale = Math.max(mTotalDy / 1000F + 1, 1F)
+        mScale = Math.max(mTotalDy / imgHeight.toFloat() + 1, 1F)
         img.scaleX = mScale
         img.scaleY = mScale
+
+        val mLastAppBarBottom = appbarHeight + imgHeight / 2 * (mScale - 1)
+
+        //appbar需要设置clipChildren才行
+        appbar.bottom = mLastAppBarBottom.toInt()
+
+        target.scrollY = 0
+
+        imgBottom.top = (mLastAppBarBottom - imgBottom.height).toInt()
+        imgBottom.bottom = mLastAppBarBottom.toInt()
     }
 
+    var anim: ValueAnimator? = null
     fun recoveryImg() {
         //必须判断mScale == 1F,不然会每次把mTotalDy都设置为0, 因为每次都会重新new一个新的ValueAnimator, 所以isRecovering为false的时候, 动画可能还没有真正结束
-        if (mScale == 1F || isRecovering) {
+        if (mScale == 1F) {
             return
         }
 
-        val anim = ValueAnimator.ofFloat(mScale, 1F).setDuration(200)
+        if (anim != null && anim!!.isRunning) {
+            anim!!.cancel()
+        }
+        anim = ValueAnimator.ofFloat(mScale, 1F).setDuration(200)
         mTotalDy = 0
         mScale = 1F
         /*if (!isAnimate) {
@@ -110,20 +136,22 @@ class Behavior17 : AppBarLayout.Behavior {
             isRecovering = false
             return
         }*/
-        anim.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
-            override fun onAnimationUpdate(animation: ValueAnimator) {
-                val value = animation.animatedValue as Float
-                img.scaleX = value
-                img.scaleY = value
-            }
-        })
-        anim.addListener(object : Animator.AnimatorListener {
+        anim!!.addUpdateListener { animation ->
+            val value = animation.animatedValue as Float
+            img.scaleX = value
+            img.scaleY = value
+
+            val mLastAppBarBottom = appbarHeight + imgHeight / 2 * (value - 1)
+            appbar.bottom = mLastAppBarBottom.toInt()
+            imgBottom.top = (mLastAppBarBottom - imgBottom.height).toInt()
+            imgBottom.bottom = mLastAppBarBottom.toInt()
+        }
+        anim!!.addListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
 
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                isRecovering = false
                 mTotalDy = 0
             }
 
@@ -135,7 +163,6 @@ class Behavior17 : AppBarLayout.Behavior {
 
             }
         })
-        isRecovering = true
-        anim.start()
+        anim!!.start()
     }
 }
